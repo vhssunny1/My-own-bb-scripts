@@ -1,0 +1,23 @@
+target=$1;
+
+
+rm dang-all.txt
+rm dang-today.txt
+
+while read -r line;
+
+do
+        echo " Dang ip  started"
+       # rm dang-all.txt
+#       rm dang-today.txt
+echo $line
+        cat $line | httpx -ip | cut -d "[" -f 2 | cut -d "]" -f 1 | cinfo | sort -u | cut -d "," -f 2 | sort -u | tee -a dang-all.txt
+        #cp dang-all.txt dang-new.txt
+        #cat dang-new.txt | anew dang-all.txt | sort -u  > dang-today.txt
+        #cat dang-today.txt
+
+done < $1
+
+
+        cat dang-all.txt | anew dang-new.txt | sort -u  > dang-today.txt
+        cat dang-today.txt #| notify
